@@ -1,10 +1,11 @@
-Kata_14 Instructions
+Kata_fifteen Instructions
 
-Get references to button and textView
+Implement Viewbinding in both the activity and in a fragment.
 
-Make it so each button press results in an increased number in the textView.
 
-Now create a viewModel which does the same thing and link the activity to the viewModel.
+
+
+
 
 
 
@@ -17,6 +18,72 @@ Now create a viewModel which does the same thing and link the activity to the vi
 
 
 cheat:
+
+
+
+
+
+class MainActivity : AppCompatActivity(),LifecycleOwner {
+
+
+  private lateinit var binding: ActivityMainBinding
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
+
+
+
+        val myViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+
+
+        val myButton = binding.button
+        val myTextView = binding.textView
+        myButton.setOnClickListener {
+
+        myViewModel.addNumber()
+            myTextView.text = myViewModel.number.toString()
+
+        }
+
+
+
+
+
+    }
+}
+
+class BlankFragment : Fragment() {
+
+
+  private var _binding: FragmentBlankBinding? = null
+    private val binding get() = _binding!!
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+
+            _binding = FragmentBlankBinding.inflate(inflater,container,false)
+
+        val view = binding.root
+
+        binding.myTextViewInFragment.text = "hi."
+
+
+        // Inflate the layout for this fragment
+        return view
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
+}
+
 
 
 

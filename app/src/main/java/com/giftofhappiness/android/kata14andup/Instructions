@@ -1,0 +1,68 @@
+Kata_14 Instructions
+
+Get references to button and textView
+
+Make it so each button press results in an increased number in the textView.
+
+Now create a viewModel which does the same thing and link the activity to the viewModel.
+
+
+
+
+
+
+
+
+
+
+
+cheat:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class MainActivity : AppCompatActivity(),LifecycleOwner {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+
+
+        val myViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+
+        val myButton : Button = findViewById(R.id.button)
+        val myTextView: TextView = findViewById(R.id.textView)
+        myButton.setOnClickListener {
+
+        myViewModel.addNumber()
+            myTextView.text = myViewModel.number.toString()
+
+        }
+
+
+
+
+
+    }
+}
+
+class MainActivityViewModel: ViewModel() {
+
+    var number = 0
+
+
+    fun addNumber(){
+        number++
+    }
+
+
+}

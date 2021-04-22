@@ -14,20 +14,5 @@ class MainActivity : AppCompatActivity(),LifecycleOwner {
         setContentView(R.layout.activity_main)
 
 
-        val myViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-
-        val myButton : Button = findViewById(R.id.button)
-        val myTextView: TextView = findViewById(R.id.textView)
-        myButton.setOnClickListener {
-
-        myViewModel.addNumber()
-            myTextView.text = myViewModel.number.toString()
-
-        }
-
-
-
-
-
     }
 }
